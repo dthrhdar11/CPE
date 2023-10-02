@@ -1,33 +1,25 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <vector>
-#include <algorithm>
-using namespace std;
- 
+//uva10268
+#include <bits/stdc++.h>
 
- 
+using namespace std;
+
 int main() {
-		int x;
-    while (cin >> x){
-    	vector <int> v;
-    	string s;
-        cin.ignore(1);
-        getline(cin, s);
-        //cout << "s: " << s << "\n";
-        stringstream ss(s);
-        while (ss >> s){
-            v.push_back(stoi(s));
+
+    long long int x, x1, temp;
+    char c;
+    vector<long long int> a;
+
+    while (scanf("%lld",&x)!=EOF) {
+        while (scanf("%lld%c",&temp, &c)) {
+            if (c!=' ')
+                break;
+            a.push_back(temp);
         }
-        v.pop_back();
-        reverse(v.begin(), v.end());
-        long long mul = 1;
-        int ans = 0;
-        for (int i = 0; i < v.size(); i++){
-            //cout << "i: " << i << " " << v[i] << " " << ans << " " << mul << "\n";
-            ans += v[i]*(i+1)*mul;
-            mul *= x;
-        }
-        cout << ans << endl;
+        temp = 0, x1 = 1;
+        for (int i = a.size()-1, j = 1; i>=0; i--, j++)
+            temp+= a[i]*j*x1, x1*= x;
+        printf("%lld\n", temp);
+        a.clear();
     }
+    return 0;
 }
